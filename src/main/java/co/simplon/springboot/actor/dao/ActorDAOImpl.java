@@ -22,7 +22,7 @@ import co.simplon.springboot.actor.model.Actor;
  */
 //@Component
 @Repository
-public class JdbcActorDAO implements ActorDAO {
+public class ActorDAOImpl implements ActorDAO {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private DataSource datasource;
@@ -32,7 +32,7 @@ public class JdbcActorDAO implements ActorDAO {
 	 * @param jdbcTemplate : the JDBCTemplace connected to the Database (thanks to Spring)
 	 */
 	@Autowired
-	public JdbcActorDAO(JdbcTemplate jdbcTemplate) {
+	public ActorDAOImpl(JdbcTemplate jdbcTemplate) {
 		this.datasource = jdbcTemplate.getDataSource();
 	}
 

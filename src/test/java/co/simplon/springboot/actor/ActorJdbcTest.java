@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import co.simplon.springboot.actor.dao.ActorDAO;
 import co.simplon.springboot.actor.model.Actor;
 import co.simplon.springboot.actor.service.ActorService;
+import co.simplon.springboot.actor.service.ActorServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ActorApplication.class)
@@ -33,7 +34,7 @@ public class ActorJdbcTest {
 
 	@BeforeClass
 	public static void initActor() throws Exception {
-		actorSce = new ActorService();
+		actorSce = new ActorServiceImpl();
 	}
 
 	@Test
