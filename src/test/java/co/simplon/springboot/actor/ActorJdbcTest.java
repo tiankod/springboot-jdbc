@@ -8,38 +8,28 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.simplon.springboot.actor.dao.ActorDAO;
 import co.simplon.springboot.actor.model.Actor;
-import co.simplon.springboot.actor.service.ActorService;
-import co.simplon.springboot.actor.service.ActorServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ActorApplication.class)
 
 public class ActorJdbcTest {
 
-	static ActorService actorSce;
-
 	@Autowired
-	@Qualifier("jdbcActorDAO")
 	ActorDAO actorDAO;
-
-	@BeforeClass
-	public static void initActor() throws Exception {
-		actorSce = new ActorServiceImpl();
-	}
 
 	@Test
 	public void testFindOneOk() {
+		
 		Actor actor = new Actor();
+		
 		try {
 			actor = actorDAO.getActor((long) 1);
 		} catch (Exception e) {
