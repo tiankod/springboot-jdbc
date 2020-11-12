@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,7 @@ public class ActorJdbcTest {
 		assertThat(actor, instanceOf(Actor.class));
 	}
 
+	@Ignore
 	@Test
 	public void testInsert() {
 		Actor actor = new Actor();
