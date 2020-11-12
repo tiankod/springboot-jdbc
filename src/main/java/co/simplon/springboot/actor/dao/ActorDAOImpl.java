@@ -20,7 +20,6 @@ import co.simplon.springboot.actor.model.Actor;
 /**
  * JDBD implementation of the Actor DAO interface.
  */
-//@Component
 @Repository
 public class ActorDAOImpl implements ActorDAO {
 
@@ -128,16 +127,10 @@ public class ActorDAOImpl implements ActorDAO {
 		int i = 0;
 		Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 		
-		// TODO
-		// force auto incremente en initialisant à 0, sinon erreur sql si id
-		// existant
-		actor.setId(new Long(0));
-
 		try {
 			// Prepare the SQL query
-			String sql = "INSERT INTO actor (actor_id, first_name, last_name, last_update) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO actor (first_name, last_name, last_update) VALUES (?,?,?)";
 			pstmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setLong(++i, actor.getId());
 			pstmt.setString(++i, actor.getFirstName());
 			pstmt.setString(++i, actor.getLastName());
 			pstmt.setTimestamp(++i, updateTime);
@@ -148,7 +141,6 @@ public class ActorDAOImpl implements ActorDAO {
 			// Run the the update query
 			pstmt.executeUpdate();
 
-			// TODO 
 			// recupération de l'id genere, et maj de l'acteur avec l'id et la date de modif
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {

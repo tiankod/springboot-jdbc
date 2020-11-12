@@ -63,7 +63,6 @@ public class ActorJdbcTest {
 		assertThat(actor, instanceOf(Actor.class));
 	}
 
-	@Ignore
 	@Test
 	public void testInsert() {
 		Actor actor = new Actor();
