@@ -26,5 +26,8 @@ hs_err_pid*
 .classpath
 .settings/
 
+# Intellij project
+.idea/
+
 # springboot target folder
 target/

@@ -21,17 +21,20 @@ import co.simplon.springboot.actor.service.ActorService;
 @RequestMapping("/api")
 public class ActorController {
 
-	@Autowired
-	private ActorService actorService;
-	
+
+	private final ActorService actorService;
+
+	public ActorController(@Autowired ActorService actorService) {
+		this.actorService = actorService;
+	}
+
 	/**
 	 * Get all the actors.
 	 * @return a list with all the actors
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/actors", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllActors(){
-		List<Actor> listActor = null;
+		List<Actor> listActor;
 		try {
 			listActor = actorService.getAllActors();
 		} catch (Exception e) {
@@ -45,11 +48,10 @@ public class ActorController {
 	 * Get a specific actor based on ID
 	 * @param id : the id of actor.
 	 * @return the actor
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/actor/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getActor(@PathVariable Long id){
-		Actor actor = null;
+		Actor actor;
 				
 		try {
 			actor =actorService.getActor(id);
@@ -66,11 +68,10 @@ public class ActorController {
 	/**
 	 * Create a new actor.
 	 * @param actor : the actor information.
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/actor", method = RequestMethod.POST)
 	public ResponseEntity<?> addActor(@RequestBody Actor actor){
-		Actor resultActor = null;
+		Actor resultActor;
 		String firstName = actor.getFirstName();
 		if((firstName == null) || (firstName.isEmpty()))
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The firstname is not set !");
@@ -92,11 +93,10 @@ public class ActorController {
 	 * Update an existing actor.
 	 * @param actor : the actor information.
 	 * @param id : the id of actor.
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/actor/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateActor(@RequestBody Actor actor,@PathVariable Long id) throws Exception {
-		Actor result = null;
+	public ResponseEntity<?> updateActor(@RequestBody Actor actor,@PathVariable Long id) {
+		Actor result;
 		String firstName = actor.getFirstName();
 		if((firstName == null) || (firstName.isEmpty()))
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The firstname is not set !");
@@ -117,7 +117,6 @@ public class ActorController {
 	/**
 	 * Delete an existing actor.
 	 * @param id : the id of actor.
-	 * @throws Exception
 	 */
 	@RequestMapping(value = "/actor/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteActor(@PathVariable Long id){

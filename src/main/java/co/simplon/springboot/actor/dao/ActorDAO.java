@@ -9,14 +9,14 @@ import co.simplon.springboot.actor.model.Actor;
  */
 public interface ActorDAO {
 
-	public List<Actor> listActors() throws Exception;
+	List<Actor> listActors() throws Exception;
 
-	public Actor getActor(Long id) throws Exception;
+	Actor getActor(Long id) throws Exception;
 
-	public Actor insertActor(Actor actor) throws Exception;
+	Actor insertActor(Actor actor) throws Exception;
 
-	public Actor updateActor(Actor actor) throws Exception;
+	Actor updateActor(Actor actor) throws Exception;
 	
-	public void deleteActor(Long id) throws Exception;
+	void deleteActor(Long id) throws Exception;
 
 }

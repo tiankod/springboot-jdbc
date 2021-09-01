@@ -24,7 +24,7 @@ import co.simplon.springboot.actor.model.Actor;
 public class ActorDAOImpl implements ActorDAO {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	private DataSource datasource;
+	private final DataSource datasource;
 
 	/**
 	 * Constructor
@@ -46,7 +46,7 @@ public class ActorDAOImpl implements ActorDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 		String sql;
-		ArrayList<Actor> aLlistOfActor = new ArrayList<Actor>();
+		ArrayList<Actor> aListOfActor = new ArrayList<>();
 
 		try {
 			// Prepare the SQL query
@@ -62,7 +62,7 @@ public class ActorDAOImpl implements ActorDAO {
 			// Handle the query results
 			while (rs.next()) {
 				actor = getActorFromResultSet(rs);
-				aLlistOfActor.add(actor);
+				aListOfActor.add(actor);
 			}
 
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class ActorDAOImpl implements ActorDAO {
 			con.close();
 		}
 
-		return aLlistOfActor;
+		return aListOfActor;
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class ActorDAOImpl implements ActorDAO {
 	@Override
 	public Actor updateActor(Actor actor) throws Exception {
 		Connection con = datasource.getConnection();
-		Actor result = null;
+		Actor result;
 		PreparedStatement pstmt = null;
 		int i = 0;
 		Timestamp updateTime = new Timestamp(System.currentTimeMillis());
@@ -229,7 +229,6 @@ public class ActorDAOImpl implements ActorDAO {
 			if(result != 1)
 				throw new Exception("Actor not found !");
 			
-			System.out.println("Result : " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.error("SQL Error !:" + pstmt.toString(), e);
